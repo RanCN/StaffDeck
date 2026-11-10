@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     codex_a2a_timeout_seconds: float = 1800.0
     codex_a2a_token: str = ""
     tool_base_url: str = "http://localhost:5173"
+    # Per-machine ft-loong checkout. Empty skips the tao-tie MCP and post seed.
+    ft_loong_root: str = ""
+    taotie_base_url: str = "http://127.0.0.1:8000"
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     general_skill_runtime_python: str = ""
     general_skill_runtime_venv: str = ""

@@ -41,7 +41,7 @@ from app.core.harness_recovery import (
     stop_harness_recovery_sweeper,
 )
 from app.db import engine, init_db
-from app.db.seed import seed_demo_data
+from app.db.seed import seed_demo_data, seed_ft_loong
 from app.public_api import create_public_api_app
 from app.public_api.jobs import cleanup_public_api_records, recover_public_jobs
 from app.public_api.maintenance import start_public_api_maintenance, stop_public_api_maintenance
@@ -88,6 +88,8 @@ def on_startup() -> None:
             distribution_initialized = initialize_defaults(db)
             if settings.demo_seed_enabled and not distribution_initialized:
                 seed_demo_data(db)
+            else:
+                seed_ft_loong(db)
         from staffdeck_harness.runtime import start_harness_runtime
 
         # Assemble the deployment PEP before background workers admit work.

@@ -8,6 +8,7 @@ from sqlmodel import Session, select
 from app import paths
 from app.agents.branching import ensure_open_gallery_binding
 from app.config import get_settings
+from app.db.ft_loong_seed import seed_ft_loong
 from app.db.models import (
     AgentProfile,
     GeneralSkill,
@@ -20,10 +21,9 @@ from app.db.models import (
     User,
     utc_now,
 )
-from app.security.encryption import encrypt_secret
-from app.security.auth import hash_password
 from app.db.staffdeck_seed import seed_staffdeck_admin_gallery
-
+from app.security.auth import hash_password
+from app.security.encryption import encrypt_secret
 
 ADAPTIVE_FLOW_RULE = (
     "步骤是可自适应推进的目标，不是固定问答脚本；已由当前用户消息、历史信息或路由意图满足的内容"
@@ -1054,6 +1054,7 @@ def seed_demo_data(session: Session) -> None:
             )
         )
 
+    seed_ft_loong(session)
     session.commit()
 
 
